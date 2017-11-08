@@ -8,7 +8,12 @@ public class NumbersDriver {
         //ErrorHandler.setupErrorLog(DEFAULT_LOG_FILEPATH);
 
         NumbersDriver driver = new NumbersDriver();
-        //String result = driver.runNumbersAnalysis(inputFileName);
+        try {
+            driver.runNumbersAnalysis(inputFileName);
+        }
+        catch (NumbersException e) {
+            System.err.println("error");
+        }
 
         //System.out.println(result);
     }
@@ -19,10 +24,16 @@ public class NumbersDriver {
         }
         return args[0];
     }
-    /*
-    private String runNumbersAnalysis(String inputFileName) throws NumbersException {
+
+    private void runNumbersAnalysis(String inputFileName) throws NumbersException {
         NumbersReader reader = new NumbersReader();
-        List<String> lines = reader.readInputFile(inputFileName);
+        List<String> inputLines = reader.readInputFile(inputFileName);
+        System.out.println(inputLines);
+        List<Digit> digitList = NumbersInput.inputOf(inputLines).getDigitList();
+        List<String> number = NumbersAnalyzer.digitRepresentationToNumbers(digitList);
+        for(String readNum : number) {
+            System.out.print(number);
+        }
     }
-    */
+
 }
