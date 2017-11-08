@@ -1,13 +1,11 @@
-
-
-
+import java.util.List;
 
 public class NumbersDriver {
 
     public static void main(String[] args){
 
         String inputFileName = parseFilenameFromArgs(args);
-        ErrorHandler.setupErrorLog(DEFAULT_LOG_FILEPATH);
+        //ErrorHandler.setupErrorLog(DEFAULT_LOG_FILEPATH);
 
         NumbersDriver driver = new NumbersDriver();
         String result = driver.runNumbersAnalysis(inputFileName);
@@ -22,7 +20,8 @@ public class NumbersDriver {
         return args[0];
     }
 
-    private String runNumbersAnalysis(String inputFileName) {
-
+    private String runNumbersAnalysis(String inputFileName) throws NumbersException {
+        NumbersReader reader = new NumbersReader();
+        List<String> lines = reader.readInputFile(inputFileName);
     }
 }
