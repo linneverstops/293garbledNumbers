@@ -40,5 +40,10 @@ public class Digits {
             this.segment6 = segment6;
             this.segment7 = segment7;
         }
+
+        public String getRepresentation() {
+            return representation;
+        }
     }
 }
+
