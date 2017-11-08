@@ -14,7 +14,7 @@ public class NumbersInput {
         this.secondLine = secondLine;
         this.thirdLine = thirdLine;
     }
-
+    /*
     static NumbersInput inputOf(List<String> inputLines) {
         //validation of various params
 
@@ -22,4 +22,5 @@ public class NumbersInput {
         List<String> secondLine = inputLines.subList(27, 53);
         List<String> thirdLine = inputLines.subList(54, 80);
     }
+    */
 }

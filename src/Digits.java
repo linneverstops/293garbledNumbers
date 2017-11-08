@@ -1,38 +1,52 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Digits {
 
+    public static void main(String[] args) {
+        Digit.ONE.printDigitRepresentation();
+        Digit.TWO.printDigitRepresentation();
+        Digit.THREE.printDigitRepresentation();
+        Digit.FOUR.printDigitRepresentation();
+        Digit.FIVE.printDigitRepresentation();
+        Digit.SIX.printDigitRepresentation();
+        Digit.SEVEN.printDigitRepresentation();
+        Digit.EIGHT.printDigitRepresentation();
+        Digit.NINE.printDigitRepresentation();
+        Digit.ZERO.printDigitRepresentation();
+    }
+
     public enum Digit {
-        ONE("1", false, false, false, true, false, false, true),
-        TWO("2", true, false, true, true, true, false, true),
-        THREE("3", true, false, true, true, false, true, true),
-        FOUR("4", false, true, true, true, false, false, true),
-        FIVE("5", true, true, true, false, false, true, true),
-        SIX("6", true, true, true, false, true, true, true),
-        SEVEN("7", true, false, false, true, false, false, true),
-        EIGHT("8", true, true, true, true, true, true, true),
-        NINE("9", true, true, true, true, false, true, true),
-        ZERO("0", true, true, false, true, true, false, true);
+        ONE("1", " ", " ", " ", "|", " ", " ", "|"),
+        TWO("2", "_", " ", "_", "|", "|", "_", " "),
+        THREE("3", "_", " ", "_", "|", " ", "_", "|"),
+        FOUR("4", " ", "|", "_", "|", " ", " ", "|"),
+        FIVE("5", "_", "|", "_", " ", " ", "_", "|"),
+        SIX("6", "_", "|", "_", " ", "|", "_", "|"),
+        SEVEN("7", "_", " ", " ", "|", " ", " ", "|"),
+        EIGHT("8", "_", "|", "_", "|", "|", "_", "|"),
+        NINE("9", "_", "|", "_", "|", " ", "_", "|"),
+        ZERO("0", "_", "|", " ", "|", "|", "_", "|");
 
         private final String representation;
 
-        private final boolean segment0;
+        private final String segment0;
 
-        private final boolean segment1;
+        private final String segment1;
 
-        private final boolean segment2;
+        private final String segment2;
 
-        private final boolean segment3;
+        private final String segment3;
 
-        private final boolean segment4;
+        private final String segment4;
 
-        private final boolean segment5;
+        private final String segment5;
 
-        private final boolean segment6;
+        private final String segment6;
 
-        Digit(String representation, boolean segment0, boolean segment1, boolean segment2,
-              boolean segment3, boolean segment4, boolean segment5,
-              boolean segment6) {
+        Digit(String representation, String segment0, String segment1,
+              String segment2, String segment3, String segment4,
+              String segment5, String segment6) {
             this.representation = representation;
             this.segment0 = segment0;
             this.segment1 = segment1;
@@ -46,8 +60,14 @@ public class Digits {
         public String getRepresentation() {
             return representation;
         }
-    }
 
+        public void printDigitRepresentation() {
+            System.out.println(" " + segment0 + " ");
+            System.out.println(segment1+segment2+segment3);
+            System.out.println(segment4+segment5+segment6);
+        }
+    }
+    /*
     Digits(Digit digit) {
 
     }
@@ -55,5 +75,6 @@ public class Digits {
     String matchingDigit(List<Boolean> segments) {
 
     }
+    */
 }
 

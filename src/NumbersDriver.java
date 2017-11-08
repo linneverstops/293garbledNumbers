@@ -8,9 +8,9 @@ public class NumbersDriver {
         //ErrorHandler.setupErrorLog(DEFAULT_LOG_FILEPATH);
 
         NumbersDriver driver = new NumbersDriver();
-        String result = driver.runNumbersAnalysis(inputFileName);
+        //String result = driver.runNumbersAnalysis(inputFileName);
 
-        System.out.println(result);
+        //System.out.println(result);
     }
 
     private static String parseFilenameFromArgs(String[] args){
@@ -19,9 +19,10 @@ public class NumbersDriver {
         }
         return args[0];
     }
-
+    /*
     private String runNumbersAnalysis(String inputFileName) throws NumbersException {
         NumbersReader reader = new NumbersReader();
         List<String> lines = reader.readInputFile(inputFileName);
     }
+    */
 }
