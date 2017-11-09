@@ -1,51 +1,44 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class NumbersDriver {
 
+    private final static int REQUIRED_NUM_OF_DIGITS = 9;
+
     public static void main(String[] args){
-
-        String inputFileName = parseFilenameFromArgs(args);
-        //ErrorHandler.setupErrorLog(DEFAULT_LOG_FILEPATH);
-
+        List<String> inputLines = new ArrayList<>();
+        System.out.println("Please enter 3 lines of String, each with a length of 27");
+        Scanner sc = new Scanner(System.in);
+        for(int i=0; i<3; i++)
+            inputLines.add(sc.nextLine());
         NumbersDriver driver = new NumbersDriver();
         try {
-            System.out.println(driver.runAnalysisAndGenerateResult(inputFileName));
+            System.out.println(driver.result(inputLines));
         }
-        catch (NumbersException e) {
-            System.err.println("error");
+        catch (NumbersException ne) {
+            System.err.println(ne.toString());
         }
-
-        //System.out.println(result);
     }
 
-    private static String parseFilenameFromArgs(String[] args){
-        if(args.length != 1){
-            throw new IllegalArgumentException("Must provide exactly one argument");
-        }
-        return args[0];
-    }
-
-    private String runAnalysisAndGenerateResult(String inputFileName) throws NumbersException {
-        NumbersReader reader = new NumbersReader();
-        List<String> inputLines = reader.readInputFile(inputFileName);
-        List<Digit> digitList = NumbersInput.inputOf(inputLines).getDigitList();
+    private String result(List<String> inputLines) throws NumbersException {
+        NumbersInput numbersInput = new NumbersInput();
+        List<Digit> digitList = numbersInput.inputLinesToListOfDigits(inputLines);
         //input does not contain exactly 9 digits
-        if(digitList.size() != 9)
-            return "failure";
-        List<Integer> numberList = NumbersAnalyzer.digitRepresentationToNumbers(digitList);
-        if(!numberList.contains(null))
-            return convertNumberListToString(numberList);
-        int garbledDigitIndex = NumbersAnalyzer.garbledDigitIndexFromNumberList(numberList);
+        if(digitList.size() != REQUIRED_NUM_OF_DIGITS)
+            throw new NumbersException(NumbersException.errorCode.FAILURE, "The number does not contain exactly 9 digits (Assumption 1 does not hold)");
+        List<Integer> numberList = NumbersAnalyzer.toNumbers(digitList);
+        int garbledDigitIndex = NumbersAnalyzer.garbledDigitIndex(numberList);
+        //if the garbledDigitIndex method outputs -1, it means that the numberList already represent a correct valid 9 digit number
+        //we can return the number without further analyzing
         if(garbledDigitIndex == -1)
-            return "failure";
+            return numberListToString(numberList);
         NumbersAnalyzer analyzer = new NumbersAnalyzer(digitList);
-        List<Integer> correctNumberList = analyzer.replaceGarbledDigitWithMatch();
-        if(correctNumberList.isEmpty())
-            return "ambiguous";
-        return NumbersDriver.convertNumberListToString(correctNumberList);
+        List<Integer> correctNumberList = analyzer.correctNumberList();
+        return NumbersDriver.numberListToString(correctNumberList);
     }
 
-    private static String convertNumberListToString(List<Integer> numberList) {
+    private static String numberListToString(List<Integer> numberList) {
         StringBuilder builder = new StringBuilder();
         for(Integer number :  numberList) {
             builder.append(number);

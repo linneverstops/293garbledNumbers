@@ -1,18 +1,21 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Digit {
+/**
+ *         segment0
+ *             _
+ *   segment1 |_| segment3   segment2(in the middle)
+ *   segment4 |_| segment6
+ *         segment5
+ *
+ */
+class Digit {
 
     private List<String> segments;
 
     Digit(List<String> segments){
         this.segments = segments;
-    }
-
-    public static void main(String[] args) {
-        Number.ONE.printDigitRepresentation();
-        Number.TWO.printDigitRepresentation();
-        Number.THREE.printDigitRepresentation();
     }
 
     List<String> getSegments() {
@@ -29,18 +32,14 @@ public class Digit {
 
     Integer matchingNumber() {
         String representation = stringRepresentation();
-        Number[] values = Number.values();
-        int i;
-        for (i = 0; i < values.length; i++) {
-            Number type = values[i];
-            if (representation.equals(type.stringRepresentation()))
-                return type.getNumber();
+        for(Number number : Number.values()) {
+            if(representation.equals(number.stringRepresentation()))
+                return number.getNumber();
         }
-        System.err.println("Garbled");
         return null;
     }
 
-    public enum Number {
+    enum Number {
         ONE(1, " ", " ", " ", "|", " ", " ", "|"),
         TWO(2, "_", " ", "_", "|", "|", "_", " "),
         THREE(3, "_", " ", "_", "|", " ", "_", "|"),
@@ -54,31 +53,11 @@ public class Digit {
 
         private final Integer number;
 
-        private final String segment0;
+        private final String[] segments;
 
-        private final String segment1;
-
-        private final String segment2;
-
-        private final String segment3;
-
-        private final String segment4;
-
-        private final String segment5;
-
-        private final String segment6;
-
-        Number(Integer number, String segment0, String segment1,
-             String segment2, String segment3, String segment4,
-             String segment5, String segment6) {
+        Number(Integer number, String... segments) {
             this.number = number;
-            this.segment0 = segment0;
-            this.segment1 = segment1;
-            this.segment2 = segment2;
-            this.segment3 = segment3;
-            this.segment4 = segment4;
-            this.segment5 = segment5;
-            this.segment6 = segment6;
+            this.segments = segments;
         }
 
         public Integer getNumber() {
@@ -86,38 +65,15 @@ public class Digit {
         }
 
         public List<String> toSegmentsList() {
-            List<String> segments = new ArrayList<>();
-            segments.add(segment0);
-            segments.add(segment1);
-            segments.add(segment2);
-            segments.add(segment3);
-            segments.add(segment4);
-            segments.add(segment5);
-            segments.add(segment6);
-            return segments;
+            return new ArrayList<>(Arrays.asList(segments));
         }
 
         public String stringRepresentation() {
             StringBuilder builder = new StringBuilder();
-            builder.append(segment0);
-            builder.append(segment1);
-            builder.append(segment2);
-            builder.append(segment3);
-            builder.append(segment4);
-            builder.append(segment5);
-            builder.append(segment6);
+            for(String segment : segments) {
+                builder.append(segment);
+            }
             return builder.toString();
         }
-
-        public void printDigitRepresentation() {
-            System.out.println(segment0);
-            System.out.println(segment1+segment2+segment3);
-            System.out.println(segment4+segment5+segment6);
-        }
     }
-
-
-
-
-
 }
