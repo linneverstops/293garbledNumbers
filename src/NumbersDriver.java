@@ -46,4 +46,9 @@ public class NumbersDriver {
         return builder.toString();
     }
 
+    class TestHook {
+        String result(NumbersDriver driver, List<String> inputLines) throws NumbersException {
+            return driver.result(inputLines);
+        }
+    }
 }
