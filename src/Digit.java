@@ -1,5 +1,4 @@
-import javafx.util.Builder;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Digit {
@@ -11,9 +10,13 @@ public class Digit {
     }
 
     public static void main(String[] args) {
-        Type.ONE.printDigitRepresentation();
-        Type.TWO.printDigitRepresentation();
-        Type.THREE.printDigitRepresentation();
+        Number.ONE.printDigitRepresentation();
+        Number.TWO.printDigitRepresentation();
+        Number.THREE.printDigitRepresentation();
+    }
+
+    List<String> getSegments() {
+        return this.segments;
     }
 
     String stringRepresentation() {
@@ -24,9 +27,9 @@ public class Digit {
         return builder.toString();
     }
 
-    String matchingType() {
+    Integer matchingNumber() {
         String representation = stringRepresentation();
-        for(Type type : Digit.Type.values()) {
+        for(Number type : Digit.Number.values()) {
             if(representation.equals(type.stringRepresentation()))
                 return type.getNumber();
         }
@@ -34,19 +37,19 @@ public class Digit {
         return null;
     }
 
-    public enum Type {
-        ONE("1", "   ", " ", " ", "|", " ", " ", "|"),
-        TWO("2", " _ ", " ", "_", "|", "|", "_", " "),
-        THREE("3", " _ ", " ", "_", "|", " ", "_", "|"),
-        FOUR("4", "   ", "|", "_", "|", " ", " ", "|"),
-        FIVE("5", " _ ", "|", "_", " ", " ", "_", "|"),
-        SIX("6", " _ ", "|", "_", " ", "|", "_", "|"),
-        SEVEN("7", " _ ", " ", " ", "|", " ", " ", "|"),
-        EIGHT("8", " _ ", "|", "_", "|", "|", "_", "|"),
-        NINE("9", " _ ", "|", "_", "|", " ", "_", "|"),
-        ZERO("0", " _ ", "|", " ", "|", "|", "_", "|");
+    public enum Number {
+        ONE(1, "   ", " ", " ", "|", " ", " ", "|"),
+        TWO(2, " _ ", " ", "_", "|", "|", "_", " "),
+        THREE(3, " _ ", " ", "_", "|", " ", "_", "|"),
+        FOUR(4, "   ", "|", "_", "|", " ", " ", "|"),
+        FIVE(5, " _ ", "|", "_", " ", " ", "_", "|"),
+        SIX(6, " _ ", "|", "_", " ", "|", "_", "|"),
+        SEVEN(7, " _ ", " ", " ", "|", " ", " ", "|"),
+        EIGHT(8, " _ ", "|", "_", "|", "|", "_", "|"),
+        NINE(9, " _ ", "|", "_", "|", " ", "_", "|"),
+        ZERO(0, " _ ", "|", " ", "|", "|", "_", "|");
 
-        private final String number;
+        private final Integer number;
 
         private final String segment0;
 
@@ -62,7 +65,7 @@ public class Digit {
 
         private final String segment6;
 
-        Type(String number, String segment0, String segment1,
+        Number(Integer number, String segment0, String segment1,
              String segment2, String segment3, String segment4,
              String segment5, String segment6) {
             this.number = number;
@@ -75,8 +78,20 @@ public class Digit {
             this.segment6 = segment6;
         }
 
-        public String getNumber() {
+        public Integer getNumber() {
             return number;
+        }
+
+        public List<String> toSegmentsList() {
+            List<String> segments = new ArrayList<>();
+            segments.add(segment0);
+            segments.add(segment1);
+            segments.add(segment2);
+            segments.add(segment3);
+            segments.add(segment4);
+            segments.add(segment5);
+            segments.add(segment6);
+            return segments;
         }
 
         public String stringRepresentation() {

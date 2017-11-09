@@ -29,9 +29,10 @@ public class NumbersDriver {
         NumbersReader reader = new NumbersReader();
         List<String> inputLines = reader.readInputFile(inputFileName);
         List<Digit> digitList = NumbersInput.inputOf(inputLines).getDigitList();
-        List<String> number = NumbersAnalyzer.digitRepresentationToNumbers(digitList);
-        for(String readNum : number) {
-            System.out.print(readNum);
+        NumbersAnalyzer analyzer = new NumbersAnalyzer(digitList);
+        List<Integer> correctNumberList = analyzer.replaceGarbledDigitWithMatch();
+        for(Integer number : correctNumberList) {
+            System.out.print(number);
         }
         System.out.println("\n");
     }
