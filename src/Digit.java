@@ -33,7 +33,7 @@ public class Digit {
             if(representation.equals(type.stringRepresentation()))
                 return type.getNumber();
         }
-        System.err.println("Garbled\n");
+        System.err.println("Garbled");
         return null;
     }
 

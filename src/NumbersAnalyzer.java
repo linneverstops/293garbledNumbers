@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NumbersAnalyzer {
@@ -40,12 +41,16 @@ public class NumbersAnalyzer {
     List<Integer> replaceGarbledDigitWithMatch() {
         List<Integer> correctNumberList = this.numberList;
         Integer matchingInteger = garbledDigit.findMatchingInteger();
+        //if more than one matching result
+        if(matchingInteger == -1) {
+            return Collections.emptyList();
+        }
         correctNumberList.remove(garbledDigitIndex);
         correctNumberList.add(garbledDigitIndex, matchingInteger);
         return correctNumberList;
     }
 
-    private class GarbledDigit {
+    class GarbledDigit {
 
         private List<String> garbledSegments;
 
@@ -69,7 +74,7 @@ public class NumbersAnalyzer {
         private Digit.Number compareGarbledSegmentsToCorrectSegments(Digit.Number number) {
             List<String> correctSegments = number.toSegmentsList();
             for(int i=0; i<this.garbledSegments.size(); i++) {
-                if(!garbledSegments.get(i).equals(correctSegments.get(i)) && garbledSegments.get(i) != null) {
+                if(!(garbledSegments.get(i).equals(correctSegments.get(i))) && !garbledSegments.get(i).equals(" ")) {
                     return null;
                 }
             }

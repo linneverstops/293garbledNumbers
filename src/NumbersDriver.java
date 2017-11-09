@@ -9,7 +9,7 @@ public class NumbersDriver {
 
         NumbersDriver driver = new NumbersDriver();
         try {
-            driver.runNumbersAnalysis(inputFileName);
+            System.out.println(driver.runAnalysisAndGenerateResult(inputFileName));
         }
         catch (NumbersException e) {
             System.err.println("error");
@@ -25,16 +25,32 @@ public class NumbersDriver {
         return args[0];
     }
 
-    private void runNumbersAnalysis(String inputFileName) throws NumbersException {
+    private String runAnalysisAndGenerateResult(String inputFileName) throws NumbersException {
         NumbersReader reader = new NumbersReader();
         List<String> inputLines = reader.readInputFile(inputFileName);
         List<Digit> digitList = NumbersInput.inputOf(inputLines).getDigitList();
+        //input does not contain exactly 9 digits
+        if(digitList.size() != 9)
+            return "failure";
+        List<Integer> numberList = NumbersAnalyzer.digitRepresentationToNumbers(digitList);
+        if(!numberList.contains(null))
+            return convertNumberListToString(numberList);
+        int garbledDigitIndex = NumbersAnalyzer.garbledDigitIndexFromNumberList(numberList);
+        if(garbledDigitIndex == -1)
+            return "failure";
         NumbersAnalyzer analyzer = new NumbersAnalyzer(digitList);
         List<Integer> correctNumberList = analyzer.replaceGarbledDigitWithMatch();
-        for(Integer number : correctNumberList) {
-            System.out.print(number);
+        if(correctNumberList.isEmpty())
+            return "ambiguous";
+        return NumbersDriver.convertNumberListToString(correctNumberList);
+    }
+
+    private static String convertNumberListToString(List<Integer> numberList) {
+        StringBuilder builder = new StringBuilder();
+        for(Integer number :  numberList) {
+            builder.append(number);
         }
-        System.out.println("\n");
+        return builder.toString();
     }
 
 }

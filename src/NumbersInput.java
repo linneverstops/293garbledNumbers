@@ -14,12 +14,11 @@ public class NumbersInput {
     }
 
     static NumbersInput inputOf(List<String> inputLines) {
-        //validation of various params
-
+        //check if
         String firstLine = inputLines.get(0);
         String secondLine = inputLines.get(1);
         String thirdLine = inputLines.get(2);
-        //check the length of all 3 lines
+        //check if each line's length is 27
         List<Digit> digitsList = buildListOfDigits(firstLine, secondLine, thirdLine);
         return new NumbersInput(digitsList);
     }
