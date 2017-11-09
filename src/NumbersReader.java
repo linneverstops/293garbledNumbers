@@ -6,8 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 
-
-public class NumbersReader {
+class NumbersReader {
 
     List<String> readInputFile(String filename) throws NumbersException {
         File file = makeFileFromFilename(filename);

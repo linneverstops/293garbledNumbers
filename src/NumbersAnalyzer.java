@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NumbersAnalyzer {
+class NumbersAnalyzer {
 
     private List<Integer> numberList;
 
@@ -50,7 +50,7 @@ public class NumbersAnalyzer {
         return correctNumberList;
     }
 
-    class GarbledDigit {
+    private class GarbledDigit {
 
         private List<String> garbledSegments;
 

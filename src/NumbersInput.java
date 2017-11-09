@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumbersInput {
+class NumbersInput {
 
     private final List<Digit> digitList;
 
@@ -9,7 +9,7 @@ public class NumbersInput {
         this.digitList = digitList;
     }
 
-    public List<Digit> getDigitList() {
+    List<Digit> getDigitList() {
         return this.digitList;
     }
 
@@ -28,7 +28,8 @@ public class NumbersInput {
         //might cause null pointer/array out of bounds
         for(int i=0; i<firstLine.length(); i+=3) {
             List<String> segments = new ArrayList<>();
-            segments.add(firstLine.substring(i, i+3));
+            String topPortion = firstLine.substring(i, i+3);
+            segments.add(topPortion.substring(1, 2));
             String middlePortion = secondLine.substring(i, i+3);
             segments.add(middlePortion.substring(0, 1));
             segments.add(middlePortion.substring(1, 2));

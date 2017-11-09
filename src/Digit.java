@@ -19,7 +19,7 @@ public class Digit {
         return this.segments;
     }
 
-    String stringRepresentation() {
+    private String stringRepresentation() {
         StringBuilder builder = new StringBuilder();
         for(String segment : this.segments) {
             builder.append(segment);
@@ -29,25 +29,28 @@ public class Digit {
 
     Integer matchingNumber() {
         String representation = stringRepresentation();
-        for(Number type : Digit.Number.values()) {
-            if(representation.equals(type.stringRepresentation()))
+        Number[] values = Number.values();
+        int i;
+        for (i = 0; i < values.length; i++) {
+            Number type = values[i];
+            if (representation.equals(type.stringRepresentation()))
                 return type.getNumber();
         }
-        System.err.println("Garbled");
+        System.err.println("Garbled: index=" + i);
         return null;
     }
 
     public enum Number {
-        ONE(1, "   ", " ", " ", "|", " ", " ", "|"),
-        TWO(2, " _ ", " ", "_", "|", "|", "_", " "),
-        THREE(3, " _ ", " ", "_", "|", " ", "_", "|"),
-        FOUR(4, "   ", "|", "_", "|", " ", " ", "|"),
-        FIVE(5, " _ ", "|", "_", " ", " ", "_", "|"),
-        SIX(6, " _ ", "|", "_", " ", "|", "_", "|"),
-        SEVEN(7, " _ ", " ", " ", "|", " ", " ", "|"),
-        EIGHT(8, " _ ", "|", "_", "|", "|", "_", "|"),
-        NINE(9, " _ ", "|", "_", "|", " ", "_", "|"),
-        ZERO(0, " _ ", "|", " ", "|", "|", "_", "|");
+        ONE(1, " ", " ", " ", "|", " ", " ", "|"),
+        TWO(2, "_", " ", "_", "|", "|", "_", " "),
+        THREE(3, "_", " ", "_", "|", " ", "_", "|"),
+        FOUR(4, " ", "|", "_", "|", " ", " ", "|"),
+        FIVE(5, "_", "|", "_", " ", " ", "_", "|"),
+        SIX(6, "_", "|", "_", " ", "|", "_", "|"),
+        SEVEN(7, "_", " ", " ", "|", " ", " ", "|"),
+        EIGHT(8, "_", "|", "_", "|", "|", "_", "|"),
+        NINE(9, "_", "|", "_", "|", " ", "_", "|"),
+        ZERO(0, "_", "|", " ", "|", "|", "_", "|");
 
         private final Integer number;
 
