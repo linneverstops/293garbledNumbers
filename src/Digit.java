@@ -16,17 +16,21 @@ public class Digit {
         Type.THREE.printDigitRepresentation();
     }
 
-    String matchingType() {
+    String stringRepresentation() {
         StringBuilder builder = new StringBuilder();
         for(String segment : this.segments) {
             builder.append(segment);
         }
-        String representation = builder.toString();
+        return builder.toString();
+    }
+
+    String matchingType() {
+        String representation = stringRepresentation();
         for(Type type : Digit.Type.values()) {
             if(representation.equals(type.stringRepresentation()))
                 return type.getNumber();
         }
-        System.err.println("Garbled");
+        System.err.println("Garbled\n");
         return null;
     }
 

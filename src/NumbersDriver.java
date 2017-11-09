@@ -28,12 +28,12 @@ public class NumbersDriver {
     private void runNumbersAnalysis(String inputFileName) throws NumbersException {
         NumbersReader reader = new NumbersReader();
         List<String> inputLines = reader.readInputFile(inputFileName);
-        System.out.println(inputLines);
         List<Digit> digitList = NumbersInput.inputOf(inputLines).getDigitList();
         List<String> number = NumbersAnalyzer.digitRepresentationToNumbers(digitList);
         for(String readNum : number) {
-            System.out.print(number);
+            System.out.print(readNum);
         }
+        System.out.println("\n");
     }
 
 }

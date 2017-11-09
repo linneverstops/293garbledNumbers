@@ -27,15 +27,23 @@ public class NumbersInput {
     private static List<Digit> buildListOfDigits(String firstLine, String secondLine, String thirdLine) {
         List<Digit> digitsList = new ArrayList<>();
         //might cause null pointer/array out of bounds
-        for(int i=0; i<firstLine.size(); i+=3) {
+        for(int i=0; i<firstLine.length(); i+=3) {
             List<String> segments = new ArrayList<>();
-            segments.addAll(firstLine.subList(i, i+2));
-            segments.addAll(secondLine.subList(i, i+2));
-            segments.addAll(thirdLine.subList(i, i+2));
+            segments.add(firstLine.substring(i, i+3));
+            String middlePortion = secondLine.substring(i, i+3);
+            segments.add(middlePortion.substring(0, 1));
+            segments.add(middlePortion.substring(1, 2));
+            segments.add(middlePortion.substring(2, 3));
+            String bottomPortion = thirdLine.substring(i, i+3);
+            segments.add(bottomPortion.substring(0, 1));
+            segments.add(bottomPortion.substring(1, 2));
+            segments.add(bottomPortion.substring(2, 3));
             Digit digit = new Digit(segments);
             digitsList.add(digit);
         }
         return digitsList;
     }
+
+
 
 }
