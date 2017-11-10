@@ -76,7 +76,7 @@ much nor too little?
 	I think the defensive programming is a little too much because some of the Exceptions that I throw will never be caught.
 For example, the instructions said that I should return failure if there is no match to the input digit. However, there is no
 way there is no match for an input digit because all the weird inputs have been caught before this step(e.g. having extra segments 
-outside of the 7 segments or not having enought segments). Since the digit 8 contains all other digits, there will always
+outside of the 7 segments or not having enough segments). Since the digit 8 contains all other digits, there will always
 be a match. Therefore, even though I wrote a check for no input match, as it is required in the instructions, it can never be
 reached because I did other checks in other methods to ensure the input is good data. 	
 
@@ -124,7 +124,7 @@ Security Issues
 overflows, SQL injection, HTML injection, integer overflows, and other
 malicious inputs?
 	For the standard input, I used a for-loop to restrict the input data to be exactly MAXIMUM_NUMBER_OF_INPUT_LINES,
-which is exactly 6 lines. I used that to prevent the program from geting a data/buffer overflow problem.
+which is exactly 3 lines. I used that to prevent the program from geting a data/buffer overflow problem.
 
 ❑ Are all error-return codes checked?
 	I am confused about the definition of error-return codes and I assume it means the code that will execute

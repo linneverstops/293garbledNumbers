@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * for this class, line 76 is never reached because I have checked for extra segments in
+ * line 32 of NumbersInput and since the digit 8 contains all other digit, it will always
+ * have a match.
+ */
 class NumbersAnalyzer {
 
     private final static int REQUIRED_NUM_OF_DIGITS = 9;
@@ -26,10 +30,9 @@ class NumbersAnalyzer {
     }
 
     static List<Integer> toNumbers(List<Digit> digitList) throws NumbersException {
-        //if input does not contain exactly 9 digit
-        //Guard Clause
-        if (digitList.size() != REQUIRED_NUM_OF_DIGITS)
-            throw new NumbersException(NumbersException.errorCode.failure, "The number does not contain exactly 9 digits (Assumption 1 does not hold)");
+        //precondition: digitList has a length of 9
+        //always satisfied because the length of 27 per line has been checked and
+        //9 digits will be chopped off
         List<Integer> numberList = new ArrayList<>();
         for(Digit digit : digitList) {
             Integer number = digit.matchingNumber();

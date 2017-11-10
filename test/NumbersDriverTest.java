@@ -1,21 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-/**
- * for this class, the main method is never tested so the code coverage will not
- * cover the main method. Also in line 41, all the NumbersException I wrote in
- * this program has a non-null errorCode so this line will never be reached
- * but having this line here prevent future writers to get an Exception if a
- *
- */
 public class NumbersDriverTest {
 
     private NumbersDriver driver;
@@ -31,6 +21,12 @@ public class NumbersDriverTest {
     private List<String> match_integers;
 
     private List<String> not_long_enough_input;
+
+    private List<String> extra_segments;
+
+    private List<String> extra_lines;
+
+    private List<String> wrong_representation;
 
     @Before
     public void setUp() {
@@ -56,6 +52,20 @@ public class NumbersDriverTest {
         not_long_enough_input.add("    _  _  _  _  _  _  _  _ ");
         not_long_enough_input.add("|__||_||_||_||_||_||_|");
         not_long_enough_input.add("|_| _|  ||_||_||_||_||||_|");
+        extra_segments = new ArrayList<>();
+        extra_segments.add("| | _  __ _  _  _ |_|    _ ");
+        extra_segments.add("  | _|  ||_||_||_||_||_||_|");
+        extra_segments.add("  ||_   ||_||_||_||_|  ||_|");
+        extra_lines = new ArrayList<>();
+        extra_lines.add("    _  _  _  _  _  _  _  _ ");
+        extra_lines.add("|_||_||_||_||_||_||_||_||_|");
+        extra_lines.add("|_||_||_||_||_||_||_||_||_|");
+        extra_lines.add("|_||_||_||_||_||_||_||_||_|");
+        extra_lines.add("    _  _  _  _  _  _  _  _ ");
+        wrong_representation = new ArrayList<>();
+        wrong_representation.add("                          ");
+        wrong_representation.add("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        wrong_representation.add("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     }
 
     @Test
@@ -64,23 +74,13 @@ public class NumbersDriverTest {
     }
 
     @Test
-    public void ambiguous_Integers_Test() {
-        try {
-            sampleTestObj.result(driver, ambiguous_integers);
-        }
-        catch (NumbersException ne) {
-            assertThat(ne.toString(), is("AMBIGUOUS: More than one solution was found"));
-        }
+    public void ambiguous_Integers_Test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, ambiguous_integers), "ambiguous");
     }
 
     @Test
-    public void multiple_Garbled_Integers_Test() {
-        try {
-            sampleTestObj.result(driver, multiple_garbled_integers);
-        }
-        catch (NumbersException ne) {
-            assertThat(ne.toString(), is("FAILURE: More than one digit is garbled (Assumption 3 does not hold)"));
-        }
+    public void multiple_Garbled_Integers_Test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, multiple_garbled_integers), "failure");
     }
 
     @Test
@@ -89,12 +89,22 @@ public class NumbersDriverTest {
     }
 
     @Test
-    public void not_long_enough_input_Test() {
-        try{
-            sampleTestObj.result(driver, not_long_enough_input);
-        }
-        catch (NumbersException ne) {
-            assertThat(ne.toString(), is("FAILURE: Input lines do not have length 27"));
-        }
+    public void not_long_enough_input_Test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, not_long_enough_input), "failure");
+    }
+
+    @Test
+    public void extra_segments_test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, extra_segments), "failure");
+    }
+
+    @Test
+    public void extra_lines_test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, extra_lines), "failure");
+    }
+
+    @Test
+    public void wrong_representation_test() throws NumbersException {
+        assertEquals(sampleTestObj.result(driver, wrong_representation), "failure");
     }
 }

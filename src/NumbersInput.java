@@ -48,12 +48,12 @@ class NumbersInput {
 
     private static void checkNumberOfLines(List<String> inputLines) throws NumbersException {
         if(inputLines.size() != REQUIRED_NUMBER_OF_LINES) {
-            throw new NumbersException(NumbersException.errorCode.failure, "Input file content does not have the correct format of 3 lines of String of length 27");
+            throw new NumbersException(NumbersException.errorCode.failure, "Input file does not have exactly 3 lines");
         }
     }
 
     private static void checkLineLength(String line) throws NumbersException {
         if(line.length() != REQUIRED_LINE_LENGTH)
-            throw new NumbersException(NumbersException.errorCode.failure, "Input lines do not have length 27");
+            throw new NumbersException(NumbersException.errorCode.failure, "Input lines do not have exactly 9 digits (Assumption 1 does not hold)");
     }
 }

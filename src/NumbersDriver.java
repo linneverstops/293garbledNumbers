@@ -1,12 +1,17 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * for this class, the main method is never tested so the code coverage will not
+ * cover the main method.
+ * Also, in line 45, the assert-fail will never be reached since I never declared a NumbersException
+ * with a null errorCode in my code
+ */
 public class NumbersDriver {
 
-    private static final int MAXIMUM_NUMBER_OF_INPUT_LINES = 6;
+    private static final int MAXIMUM_NUMBER_OF_INPUT_LINES = 3;
 
     private static final File DEFAULT_LOG_FILEPATH = new File("log/log.txt");
 
@@ -16,12 +21,12 @@ public class NumbersDriver {
         Scanner sc = new Scanner(System.in);
         for(int i=0; i<MAXIMUM_NUMBER_OF_INPUT_LINES; i++)
             inputLines.add(sc.nextLine());
-        ErrorLogger.setUpErrorLogFile(DEFAULT_LOG_FILEPATH);
         NumbersDriver driver = new NumbersDriver();
         System.out.println(driver.result(inputLines));
     }
 
     private String result(List<String> inputLines) {
+        ErrorLogger.setUpErrorLogFile(DEFAULT_LOG_FILEPATH);
         try {
             NumbersInput numbersInput = new NumbersInput();
             List<Digit> digitList = numbersInput.inputLinesToListOfDigits(inputLines);
