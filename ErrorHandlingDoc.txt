@@ -1,0 +1,145 @@
+TungHo Lin
+txl429
+EECS293 PA10 
+ErrorHandlingDoc
+
+
+CHECKLIST: Defensive Programming
+General
+❑ Does the routine protect itself from bad input data?
+Exception-class
+	I protect the routine from bad input data by creating its own Exception class-NumbersException.
+I put parameter checks in the code so that if there is bad data, an Exception would immediately be thrown
+and the program would not proceed further. For example, in the NumbersInput class, the inputLinesToListOfDigits
+method, I check if there are exactly 3 lines before chopping the lines into single lines. And before passing 
+the 3 lines to the helper method listOfDigits, I check if all 3 lines have the length of 27.
+If not, then it should throw an Exception and prevent bad data from being passed to somewhere else.
+Guard-Clause
+	I have used guard clause to terminate the program by throwing an Exception at the beginning of several
+methods. For example, in NumberAnalysis, the methods toNumbers and garbledDigitIndex both have guard clauses
+to prevent bad data from being passed on. For the toNumbers guardclause, if there are not exactly 9 digits,
+there is no need to further make the digitlist into a numberlist and go on. For the garbledDigitIndex, if there
+is no null in the numberList, it would mean the numbers are already 9-digits-long and valid. It would return a -1 
+instead of throwing an Exception because it is not an error.
+
+❑ Have you used assertions to document assumptions, including preconditions
+and postconditions?
+	I mainly use parameter checking and then throw an Exception if the parameter being passed in is not what
+the method expects. Therefore, I didn't use any assertions because assertions would document conditions that 
+should never happen and it seems to me that all kinds of input could have possibly been passed into the program.
+
+❑ Have assertions been used only to document conditions that should never
+occur?
+	I did not use any assertions.
+	
+❑ Does the architecture or high-level design specify a specific set of errorhandling
+techniques?
+	I have created an ErrorLogger to log severe messages to a file. Because the assignment requires
+us to return only "failure" and "ambiguous" when an error occured, the user will never know what error
+causes the failure/ambiguous. Therefore, I set up a log file inside the log directory and log the errorCode
+and the errorMessage that tells the user what went wrong with the program. 
+	I also returned an error code of ("failure"/"ambiguous")as required by the instructions. 
+	For the method garbledDigitIndex inside NumberAnalysis class, I return a -1 as a ListIndex(which
+would never happen in normal case) if there is no garbled digit found. This -1 can be considered as a status 
+variable because when it is detected as -1 in result method in NumbersDriver, it would immediately know that
+the program does not need to proceed to check the garbled digit(s) because there isn't any.
+
+❑ Does the architecture or high-level design specify whether error handling
+should favor robustness or correctness?
+	The architecture definitely favor correctness. Whenever there is an error, the program throws an Exception
+and terminates. Given the nature of how this program should run, I don't think it should favor robustness because
+continue running with bad input data will output useless data which is a waste of time and space.
+
+❑ Have barricades been created to contain the damaging effect of errors and
+reduce the amount of code that has to be concerned about error processing?
+	In the method inputLinesToListOfDigits in class NumbersInput, the program makes sure the input has a total of 3
+lines before letting it proceed to be chopped into single lines. It checks again if each line has a length of 27 before 
+letting listOfDigits turning each single line into a segment. Therefore, I would say the method inputLinesToListOfDigits
+is a good barricade to bad data input. 
+
+❑ Have debugging aids been used in the code?	
+	I am uncertain about the definition of debugging aids since it was not explained very clearly in the book what exactly
+are debugging aids and also there isn't much resources on the Internet. 
+	If it means the things that I used to help me debug my code then:
+	At the beginning of the debugging stage, I placed random "System.out.println()" into methods to tell me the values
+of each variables in each method so that I can track down an error easily. I removed them when the final code comes out.
+	I don't know if JUnit Testing is considered debugging aids but I have tried to have full code coverage from the tests.
+	
+❑ Have debugging aids been installed in such a way that they can be activated
+or deactivated without a great deal of fuss?
+	The printing variables from each method definitely needs a great deal of fuss to deactivate since you have to go 
+into the code and remove that line.
+	The Junit Tests can be activated and deactivated with a click so it is pretty convenient.
+	
+❑ Is the amount of defensive programming code appropriate—neither too
+much nor too little?
+	I think the defensive programming is a little too much because some of the Exceptions that I throw will never be caught.
+For example, the instructions said that I should return failure if there is no match to the input digit. However, there is no
+way there is no match for an input digit because all the weird inputs have been caught before this step(e.g. having extra segments 
+outside of the 7 segments or not having enought segments). Since the digit 8 contains all other digits, there will always
+be a match. Therefore, even though I wrote a check for no input match, as it is required in the instructions, it can never be
+reached because I did other checks in other methods to ensure the input is good data. 	
+
+❑ Have you used offensive-programming techniques to make errors difficult
+to overlook during development?
+	I have tried all kinds of extreme input data to see if exceptional cases is being handled well in my code. These extreme input
+data includes: empty input，data input of large size(10000 lines), data with extra segments.
+
+Exceptions
+❑ Has your project defined a standardized approach to exception handling?
+	I have created a NumbersException class which will take an errorCode and a String errorMessage.
+When thrown, it will display the errorCode(failure or ambiguous). The errorCode and the errorMessage, which tells
+the user what the error is(e.g. Input lines do not have length 27), will be logged to the log.txt file
+by the ErrorLogger.
+
+❑ Have you considered alternatives to using an exception?
+	I have tried using assertions and returning a neutral value for some of the methods. However,
+I think it would be best to throw an Exception for every error found so that it would be easier to
+collectively check for Exceptions and errors when the program runs.
+
+❑ Is the error handled locally rather than throwing a nonlocal exception, if
+possible?
+	Most of the errors are being caught in the result method so I wouldn't say the error is being handled
+locally right at where the errors are found.
+
+❑ Does the code avoid throwing exceptions in constructors and destructors?
+	The code throws its Exception in the main method and result method in NumbersDriver so no
+Exception has been thrown in constructors/destructors.
+
+❑ Are all exceptions at the appropriate levels of abstraction for the routines
+that throw them?
+	The routines would only throw a NumbersException everytime it encounters an error so I wouldn't
+say it has good level of abstraction. 
+
+❑ Does each exception include all relevant exception background information?
+	Each exception will has its own errorCode and its own unique errorMessage so it does include
+all relevant exception background information.
+
+❑ Is the code free of empty catch blocks? (Or if an empty catch block truly is
+appropriate, is it documented?)
+	There are no empty catch blocks in my code.
+	
+Security Issues
+❑ Does the code that checks for bad input data check for attempted buffer
+overflows, SQL injection, HTML injection, integer overflows, and other
+malicious inputs?
+	For the standard input, I used a for-loop to restrict the input data to be exactly MAXIMUM_NUMBER_OF_INPUT_LINES,
+which is exactly 6 lines. I used that to prevent the program from geting a data/buffer overflow problem.
+
+❑ Are all error-return codes checked?
+	I am confused about the definition of error-return codes and I assume it means the code that will execute
+after an error has been found. In that case, yes. The code that will execute after an Exception has been thrown
+would log the error in the log file. The existence of the log file is checked when the ErrorLogger is created therefore
+there is no exception to be checked for that line. The error-return code also includes another line which will return the exception's 
+errorCode. It will check if the errorCode is null. If it is, it will throw a NoSuchElementException and an errorMessage.
+This will not happen in this program because every NumbersException created has a non-null errorCode. But this clause is to prevent
+if others modify my code in the future and forgot to asssign an errorCode when they create a NumbersException.
+	
+❑ Are all exceptions caught?
+	All exceptions are caught, either by try-catch or by being thrown.
+	
+❑ Do error messages avoid providing information that would help an
+attacker break into the system?
+	The errorMessages does provide the valid and required data input style for the system to work
+perfectly. However, even if an attacker tries to break it by inputting incorrect data, the system
+can still check and stop the bad data from being passed on.

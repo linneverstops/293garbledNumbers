@@ -3,6 +3,8 @@ import java.util.List;
 
 class NumbersAnalyzer {
 
+    private final static int REQUIRED_NUM_OF_DIGITS = 9;
+
     private List<Integer> numberList;
 
     private int garbledDigitIndex;
@@ -23,7 +25,11 @@ class NumbersAnalyzer {
         return correctNumberList;
     }
 
-    static List<Integer> toNumbers(List<Digit> digitList) {
+    static List<Integer> toNumbers(List<Digit> digitList) throws NumbersException {
+        //if input does not contain exactly 9 digit
+        //Guard Clause
+        if (digitList.size() != REQUIRED_NUM_OF_DIGITS)
+            throw new NumbersException(NumbersException.errorCode.failure, "The number does not contain exactly 9 digits (Assumption 1 does not hold)");
         List<Integer> numberList = new ArrayList<>();
         for(Digit digit : digitList) {
             Integer number = digit.matchingNumber();
@@ -36,7 +42,7 @@ class NumbersAnalyzer {
         //Guard Clause
         //if there is no garbled digit in the numberList, return a -1 to indicate that the input already represent a valid nine-digit number
         if(!numberList.contains(null))
-        return -1;
+            return -1;
         List<Integer> garbledDigitIndex = new ArrayList<>();
         for(int i=0; i<numberList.size(); i++) {
             if(numberList.get(i) == null) {
@@ -45,7 +51,7 @@ class NumbersAnalyzer {
         }
         //if there is more than one garbled digit
         if(garbledDigitIndex.size() > 1)
-            throw new NumbersException(NumbersException.errorCode.FAILURE, "More than one digit is garbled (Assumption 3 does not hold)");
+            throw new NumbersException(NumbersException.errorCode.failure, "More than one digit is garbled (Assumption 3 does not hold)");
         return garbledDigitIndex.get(0);
     }
 
@@ -66,9 +72,9 @@ class NumbersAnalyzer {
             }
             //if there is more than one match
             if(possibleMatches.size() > 1)
-                throw new NumbersException(NumbersException.errorCode.AMBIGUOUS, "More than one solution was found");
+                throw new NumbersException(NumbersException.errorCode.ambiguous, "More than one solution was found");
             if(possibleMatches.size() == 0)
-                throw new NumbersException(NumbersException.errorCode.FAILURE, "No matching was found");
+                throw new NumbersException(NumbersException.errorCode.failure, "No matching was found");
             return possibleMatches.get(0).getNumber();
         }
 

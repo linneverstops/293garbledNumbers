@@ -29,7 +29,7 @@ class NumbersInput {
             addPortionToSegments(segments, thirdLine, i);
             //check if the digit has extra segments in the top left and right corners(should be empty in a normal digit)
             if(!segments.get(0).equals(" ") || !segments.get(2).equals(" "))
-                throw new NumbersException(NumbersException.errorCode.FAILURE, "Digit has segment in the wrong spot (Assumption 5 does not hold)");
+                throw new NumbersException(NumbersException.errorCode.failure, "Digit has segment in the wrong spot (Assumption 5 does not hold)");
             //remove the top left and right corner if they are empty
             segments.remove(0);
             segments.remove(1);
@@ -48,12 +48,12 @@ class NumbersInput {
 
     private static void checkNumberOfLines(List<String> inputLines) throws NumbersException {
         if(inputLines.size() != REQUIRED_NUMBER_OF_LINES) {
-            throw new NumbersException(NumbersException.errorCode.FAILURE, "Input file content does not have the correct format of 3 lines of String of length 27");
+            throw new NumbersException(NumbersException.errorCode.failure, "Input file content does not have the correct format of 3 lines of String of length 27");
         }
     }
 
     private static void checkLineLength(String line) throws NumbersException {
         if(line.length() != REQUIRED_LINE_LENGTH)
-            throw new NumbersException(NumbersException.errorCode.FAILURE, "Input lines do not have length 27");
+            throw new NumbersException(NumbersException.errorCode.failure, "Input lines do not have length 27");
     }
 }

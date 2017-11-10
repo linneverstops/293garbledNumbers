@@ -4,11 +4,15 @@ public class NumbersException extends Exception {
 
     private errorCode errorCode;
 
-    enum errorCode{FAILURE, AMBIGUOUS}
+    enum errorCode{failure, ambiguous}
 
     NumbersException(errorCode errorCode, String message) {
         super(message);
         this.errorCode = errorCode;
+    }
+
+    errorCode getErrorCode() {
+        return this.errorCode;
     }
 
     @Override
