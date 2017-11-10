@@ -9,7 +9,13 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-
+/**
+ * for this class, the main method is never tested so the code coverage will not
+ * cover the main method. Also in line 41, all the NumbersException I wrote in
+ * this program has a non-null errorCode so this line will never be reached
+ * but having this line here prevent future writers to get an Exception if a
+ *
+ */
 public class NumbersDriverTest {
 
     private NumbersDriver driver;

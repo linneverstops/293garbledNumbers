@@ -25,12 +25,12 @@ instead of throwing an Exception because it is not an error.
 ❑ Have you used assertions to document assumptions, including preconditions
 and postconditions?
 	I mainly use parameter checking and then throw an Exception if the parameter being passed in is not what
-the method expects. Therefore, I didn't use any assertions because assertions would document conditions that 
-should never happen and it seems to me that all kinds of input could have possibly been passed into the program.
+the method expects. I used one assert in line 40 in NumbersDriver to assert that the errorCode of the NumbersException
+will not be null.
 
 ❑ Have assertions been used only to document conditions that should never
 occur?
-	I did not use any assertions.
+	Having a null errorCode in a NumbersException is definitely a condition that should never happen.
 	
 ❑ Does the architecture or high-level design specify a specific set of errorhandling
 techniques?
@@ -131,9 +131,8 @@ which is exactly 6 lines. I used that to prevent the program from geting a data/
 after an error has been found. In that case, yes. The code that will execute after an Exception has been thrown
 would log the error in the log file. The existence of the log file is checked when the ErrorLogger is created therefore
 there is no exception to be checked for that line. The error-return code also includes another line which will return the exception's 
-errorCode. It will check if the errorCode is null. If it is, it will throw a NoSuchElementException and an errorMessage.
-This will not happen in this program because every NumbersException created has a non-null errorCode. But this clause is to prevent
-if others modify my code in the future and forgot to asssign an errorCode when they create a NumbersException.
+errorCode. It asserts that the errorCode to be non-null. All of the NumbersException I created in this program has a non-null
+errorCode so this line is kind of an over-kill(or to prevent future users to pass in a null errorCode).
 	
 ❑ Are all exceptions caught?
 	All exceptions are caught, either by try-catch or by being thrown.

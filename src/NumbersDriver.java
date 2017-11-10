@@ -37,8 +37,7 @@ public class NumbersDriver {
         }
         catch (NumbersException ne) {
             ErrorLogger.logError(ne);
-            if(ne.getErrorCode() == null)
-                throw new NoSuchElementException("FATAL: There is no error code in NumbersException");
+            assert ne.getErrorCode() != null;
             return ne.getErrorCode().toString();
         }
     }
