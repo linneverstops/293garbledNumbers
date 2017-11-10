@@ -22,18 +22,18 @@ class Digit {
         return this.segments;
     }
 
-    private String stringRepresentation() {
+    private static String stringRepresentation(List<String> segments) {
         StringBuilder builder = new StringBuilder();
-        for(String segment : this.segments) {
+        for(String segment : segments) {
             builder.append(segment);
         }
         return builder.toString();
     }
 
     Integer matchingNumber() {
-        String representation = stringRepresentation();
+        String representation = Digit.stringRepresentation(this.segments);
         for(Number number : Number.values()) {
-            if(representation.equals(number.stringRepresentation()))
+            if(representation.equals(Digit.stringRepresentation(number.toSegmentsList())))
                 return number.getNumber();
         }
         return null;
@@ -66,14 +66,6 @@ class Digit {
 
         public List<String> toSegmentsList() {
             return new ArrayList<>(Arrays.asList(segments));
-        }
-
-        public String stringRepresentation() {
-            StringBuilder builder = new StringBuilder();
-            for(String segment : segments) {
-                builder.append(segment);
-            }
-            return builder.toString();
         }
     }
 }

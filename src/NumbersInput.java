@@ -14,9 +14,7 @@ class NumbersInput {
         String secondLine = inputLines.get(1);
         String thirdLine = inputLines.get(2);
         //check if each line's length is 27
-        NumbersInput.checkLineLength(firstLine);
-        NumbersInput.checkLineLength(secondLine);
-        NumbersInput.checkLineLength(thirdLine);
+        NumbersInput.checkLinesLength(firstLine, secondLine, thirdLine);
         return listOfDigits(firstLine, secondLine, thirdLine);
     }
 
@@ -52,8 +50,8 @@ class NumbersInput {
         }
     }
 
-    private static void checkLineLength(String line) throws NumbersException {
-        if(line.length() != REQUIRED_LINE_LENGTH)
+    private static void checkLinesLength(String line1, String line2, String line3) throws NumbersException {
+        if(line1.length() != REQUIRED_LINE_LENGTH || line2.length() != REQUIRED_LINE_LENGTH || line3.length() != REQUIRED_LINE_LENGTH)
             throw new NumbersException(NumbersException.errorCode.failure, "Input lines do not have exactly 9 digits (Assumption 1 does not hold)");
     }
 }
