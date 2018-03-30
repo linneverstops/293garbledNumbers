@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumbersDriver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">numbers</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">NumbersDriver.java</span></div><h1>NumbersDriver.java</h1><pre class="source lang-java linenums">import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * for this class, the main method is never tested so the code coverage will not
+ * cover the main method.
+ * Also, in line 45, the assert-fail will never be reached since I never declared a NumbersException
+ * with a null errorCode in my code
+ */
+<span class="pc bpc" id="L12" title="1 of 2 branches missed.">public class NumbersDriver {</span>
+
+    private static final int MAXIMUM_NUMBER_OF_INPUT_LINES = 3;
+
+<span class="fc" id="L16">    private static final File DEFAULT_LOG_FILEPATH = new File(&quot;log/log.txt&quot;);</span>
+
+    public static void main(String[] args) throws NumbersException {
+<span class="nc" id="L19">        List&lt;String&gt; inputLines = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L20">        System.out.println(&quot;Please enter 3 lines of String, each with a length of 27&quot;);</span>
+<span class="nc" id="L21">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for(int i=0; i&lt;MAXIMUM_NUMBER_OF_INPUT_LINES; i++)</span>
+<span class="nc" id="L23">            inputLines.add(sc.nextLine());</span>
+<span class="nc" id="L24">        NumbersDriver driver = new NumbersDriver();</span>
+<span class="nc" id="L25">        System.out.println(driver.result(inputLines));</span>
+<span class="nc" id="L26">    }</span>
+
+    private String result(List&lt;String&gt; inputLines) {
+<span class="fc" id="L29">        ErrorLogger.setUpErrorLogFile(DEFAULT_LOG_FILEPATH);</span>
+        try {
+<span class="fc" id="L31">            NumbersInput numbersInput = new NumbersInput();</span>
+<span class="fc" id="L32">            List&lt;Digit&gt; digitList = numbersInput.inputLinesToListOfDigits(inputLines);</span>
+<span class="fc" id="L33">            List&lt;Integer&gt; numberList = NumbersAnalyzer.toNumbers(digitList);</span>
+<span class="fc" id="L34">            int garbledDigitIndex = NumbersAnalyzer.garbledDigitIndex(numberList);</span>
+            //if the garbledDigitIndex method outputs -1, it means that the numberList already represent a correct valid 9 digit number
+            //we can return the number without further analyzing
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            if (garbledDigitIndex == -1)</span>
+<span class="fc" id="L38">                return numberListToString(numberList);</span>
+<span class="fc" id="L39">            NumbersAnalyzer analyzer = new NumbersAnalyzer(digitList);</span>
+<span class="fc" id="L40">            List&lt;Integer&gt; correctNumberList = analyzer.correctNumberList();</span>
+<span class="fc" id="L41">            return NumbersDriver.numberListToString(correctNumberList);</span>
+        }
+<span class="fc" id="L43">        catch (NumbersException ne) {</span>
+<span class="fc" id="L44">            ErrorLogger.logError(ne);</span>
+<span class="pc bpc" id="L45" title="3 of 4 branches missed.">            assert ne.getErrorCode() != null;</span>
+<span class="fc" id="L46">            return ne.getErrorCode().toString();</span>
+        }
+    }
+
+    private static String numberListToString(List&lt;Integer&gt; numberList) {
+<span class="fc" id="L51">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        for(Integer number :  numberList) {</span>
+<span class="fc" id="L53">            builder.append(number);</span>
+<span class="fc" id="L54">        }</span>
+<span class="fc" id="L55">        return builder.toString();</span>
+    }
+
+    class TestHook {
+        String result(NumbersDriver driver, List&lt;String&gt; inputLines) throws NumbersException {
+            return driver.result(inputLines);
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

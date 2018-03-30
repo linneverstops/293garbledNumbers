@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumbersInput.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">numbers</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">NumbersInput.java</span></div><h1>NumbersInput.java</h1><pre class="source lang-java linenums">import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L4">class NumbersInput {</span>
+
+    private final static int REQUIRED_LINE_LENGTH = 27;
+
+    private final static int REQUIRED_NUMBER_OF_LINES = 3;
+
+    List&lt;Digit&gt; inputLinesToListOfDigits(List&lt;String&gt; inputLines) throws NumbersException {
+        //check if there is exactly 3 lines
+<span class="fc" id="L12">        NumbersInput.checkNumberOfLines(inputLines);</span>
+<span class="fc" id="L13">        String firstLine = inputLines.get(0);</span>
+<span class="fc" id="L14">        String secondLine = inputLines.get(1);</span>
+<span class="fc" id="L15">        String thirdLine = inputLines.get(2);</span>
+        //check if each line's length is 27
+<span class="fc" id="L17">        NumbersInput.checkLineLength(firstLine);</span>
+<span class="fc" id="L18">        NumbersInput.checkLineLength(secondLine);</span>
+<span class="fc" id="L19">        NumbersInput.checkLineLength(thirdLine);</span>
+<span class="fc" id="L20">        return listOfDigits(firstLine, secondLine, thirdLine);</span>
+    }
+
+    private List&lt;Digit&gt; listOfDigits(String firstLine, String secondLine, String thirdLine) throws NumbersException {
+<span class="fc" id="L24">        List&lt;Digit&gt; digitsList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        for(int i=0; i&lt;firstLine.length(); i+=3) {</span>
+<span class="fc" id="L26">            List&lt;String&gt; segments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L27">            addPortionToSegments(segments, firstLine, i);</span>
+<span class="fc" id="L28">            addPortionToSegments(segments, secondLine, i);</span>
+<span class="fc" id="L29">            addPortionToSegments(segments, thirdLine, i);</span>
+            //check if the digit has extra segments in the top left and right corners(should be empty in a normal digit)
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">            if(!segments.get(0).equals(&quot; &quot;) || !segments.get(2).equals(&quot; &quot;))</span>
+<span class="fc" id="L32">                throw new NumbersException(NumbersException.errorCode.failure, &quot;Digit has segment in the wrong spot (Assumption 5 does not hold)&quot;);</span>
+            //remove the top left and right corner if they are empty
+<span class="fc" id="L34">            segments.remove(0);</span>
+<span class="fc" id="L35">            segments.remove(1);</span>
+<span class="fc" id="L36">            Digit digit = new Digit(segments);</span>
+<span class="fc" id="L37">            digitsList.add(digit);</span>
+        }
+<span class="fc" id="L39">        return digitsList;</span>
+    }
+
+    private void addPortionToSegments(List&lt;String&gt; segments, String line, int startIndex) {
+<span class="fc" id="L43">        String portion = line.substring(startIndex, startIndex + 3);</span>
+<span class="fc" id="L44">        segments.add(portion.substring(0, 1));</span>
+<span class="fc" id="L45">        segments.add(portion.substring(1, 2));</span>
+<span class="fc" id="L46">        segments.add(portion.substring(2, 3));</span>
+<span class="fc" id="L47">    }</span>
+
+    private static void checkNumberOfLines(List&lt;String&gt; inputLines) throws NumbersException {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if(inputLines.size() != REQUIRED_NUMBER_OF_LINES) {</span>
+<span class="fc" id="L51">            throw new NumbersException(NumbersException.errorCode.failure, &quot;Input file does not have exactly 3 lines&quot;);</span>
+        }
+<span class="fc" id="L53">    }</span>
+
+    private static void checkLineLength(String line) throws NumbersException {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if(line.length() != REQUIRED_LINE_LENGTH)</span>
+<span class="fc" id="L57">            throw new NumbersException(NumbersException.errorCode.failure, &quot;Input lines do not have exactly 9 digits (Assumption 1 does not hold)&quot;);</span>
+<span class="fc" id="L58">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ErrorLogger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">numbers</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ErrorLogger.java</span></div><h1>ErrorLogger.java</h1><pre class="source lang-java linenums">import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+<span class="nc" id="L5">class ErrorLogger {</span>
+
+<span class="fc" id="L7">    private static final Logger logger = Logger.getLogger(&quot;NumbersLogger&quot;);</span>
+
+    static void setUpErrorLogFile(File errorLogFile) {
+        try {
+<span class="fc" id="L11">            System.setErr(new PrintStream(new FileOutputStream(errorLogFile)));</span>
+        }
+<span class="nc" id="L13">        catch (IOException ioe) {</span>
+<span class="nc" id="L14">            System.setErr(System.err);</span>
+<span class="fc" id="L15">        }</span>
+<span class="fc" id="L16">    }</span>
+
+    static void logError(NumbersException ne) {
+<span class="fc" id="L19">        logger.log(Level.SEVERE, ne.toString() + &quot;\n&quot;, ne);</span>
+<span class="fc" id="L20">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

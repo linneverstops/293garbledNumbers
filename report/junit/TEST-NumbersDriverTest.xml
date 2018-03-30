@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="DESKTOP-2IPKFCT" name="NumbersDriverTest" skipped="0" tests="8" time="0.22" timestamp="2017-11-10T12:53:11">
+  <properties>
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="log.dir" value="log" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="os.name" value="Linux" />
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="ant.home" value="/usr/share/apache-ant-1.10.1" />
+    <property name="java.runtime.version" value="1.8.0_151-b12" />
+    <property name="user.name" value="dennis" />
+    <property name="build.dir" value="build" />
+    <property name="user.language" value="en" />
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64" />
+    <property name="doc.dir" value="doc" />
+    <property name="ant.project.name" value="numbers" />
+    <property name="java.version" value="1.8.0_151" />
+    <property name="user.timezone" value="" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="ant.file.type.numbers" value="file" />
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed" />
+    <property name="sun.cpu.isalist" value="" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="file.separator" value="/" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="log.file" value="log/log.txt" />
+    <property name="java.class.version" value="52.0" />
+    <property name="user.country" value="US" />
+    <property name="java.home" value="/usr/lib/jvm/java-8-oracle/jre" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="main-class" value="NumbersDriver" />
+    <property name="ant.file" value="/mnt/c/Users/alexa/IdeaProjects/numbers/build.xml" />
+    <property name="os.version" value="4.4.0-43-Microsoft" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.version" value="25.151-b12" />
+    <property name="report.dir" value="report" />
+    <property name="ant.library.dir" value="/usr/share/apache-ant-1.10.1/lib" />
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+    <property name="_jacoco.agentFile" value="/tmp/jacocoagent6894451335670117546.jar" />
+    <property name="user.home" value="/home/dennis" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="junit.dir" value="report/junit" />
+    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib" />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="ant.file.numbers" value="/mnt/c/Users/alexa/IdeaProjects/numbers/build.xml" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner NumbersDriverTest skipNonTests=false filtertrace=false haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/mnt/c/Users/alexa/IdeaProjects/numbers/report/junit/TEST-NumbersDriverTest.xml crashfile=/mnt/c/Users/alexa/IdeaProjects/numbers/junitvmwatcher8655622302734250373.properties propsfile=/mnt/c/Users/alexa/IdeaProjects/numbers/junit6546475560810459995.properties" />
+    <property name="java.class.path" value="/usr/share/apache-ant-1.10.1/lib/hamcrest-core-1.3.jar:/mnt/c/Users/alexa/IdeaProjects/numbers/build:/usr/share/apache-ant-1.10.1/lib/junit-4.12.jar:/usr/share/apache-ant-1.10.1/lib/ant-launcher.jar:/usr/share/apache-ant-1.10.1/lib/ant.jar:/usr/share/apache-ant-1.10.1/lib/ant-junit.jar:/usr/share/apache-ant-1.10.1/lib/ant-junit4.jar:/tmp/jacocoagent6894451335670117546.jar" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.10.1 compiled on February 2 2017" />
+    <property name="jacoco.file" value="report/jacoco/jacoco.exec" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ant.file.type" value="file" />
+    <property name="java.vm.specification.version" value="1.8" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="os.arch" value="amd64" />
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/ext:/usr/java/packages/lib/ext" />
+    <property name="user.dir" value="/mnt/c/Users/alexa/IdeaProjects/numbers" />
+    <property name="jacoco.dir" value="report/jacoco" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="test-src.dir" value="test" />
+    <property name="basedir" value="/mnt/c/Users/alexa/IdeaProjects/numbers" />
+    <property name="ant.java.version" value="1.8" />
+    <property name="ant.core.lib" value="/usr/share/apache-ant-1.10.1/lib/ant.jar" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="java.specification.version" value="1.8" />
+    <property name="src.dir" value="src" />
+    <property name="ant.project.invoked-targets" value="report" />
+  </properties>
+  <testcase classname="NumbersDriverTest" name="not_long_enough_input_Test" time="0.02" />
+  <testcase classname="NumbersDriverTest" name="valid_Integers_Test" time="0.009" />
+  <testcase classname="NumbersDriverTest" name="extra_lines_test" time="0.002" />
+  <testcase classname="NumbersDriverTest" name="multiple_Garbled_Integers_Test" time="0.007" />
+  <testcase classname="NumbersDriverTest" name="extra_segments_test" time="0.006" />
+  <testcase classname="NumbersDriverTest" name="ambiguous_Integers_Test" time="0.006" />
+  <testcase classname="NumbersDriverTest" name="match_Integers_Test" time="0.004" />
+  <testcase classname="NumbersDriverTest" name="wrong_representation_test" time="0.002" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
